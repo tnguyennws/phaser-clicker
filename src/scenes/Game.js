@@ -77,4 +77,23 @@ export default class Game extends Phaser.Scene
 
     }
 
+    setScore = function(){
+        Game.scene.score = parseInt(localStorage.getItem('score')) || 0;
+        Game.scene.scoreTxt.setText(Game.scene.score);
+    };
+
+    saveFile = function(){
+        var file = {
+            score: Game.scene.score,
+            visits: Game.scene.visits
+        };
+        localStorage.setItem('saveFile',JSON.stringify(file));
+    };
+
+    loadFile = function(){
+        var file = JSON.parse(localStorage.getItem('saveFile'));
+        Game.scene.score = file.score;
+        Game.scene.visits = file.visits;
+    };
+
 }
