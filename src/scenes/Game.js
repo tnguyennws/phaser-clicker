@@ -18,8 +18,9 @@ export default class Game extends Phaser.Scene
         this.prixdesign = 10;
         this.temps = 1000;
         this.timer = 0;
+
+        this.loadFile();
         
-       
     }
 
     preload()
@@ -51,9 +52,7 @@ export default class Game extends Phaser.Scene
         nws.on(
             "pointerdown",
             function() {
-                
                 this.score += (this.levelmarket * 0.1) + 1;
-
             },
             this
         );
@@ -69,7 +68,6 @@ export default class Game extends Phaser.Scene
                     this.score  -= this.prixdev
                     this.leveldev = this.leveldev + 1;
                     this.prixdev += this.prixdev * 0.1
-                    
                 }
             },
             this
@@ -85,7 +83,6 @@ export default class Game extends Phaser.Scene
                 if(this.score >= this.prixmarket){
                     this.score  -= this.prixmarket
                     this.levelmarket = this.levelmarket + 1;
-                    console.log("level market " + this.levelmarket)
                     this.prixmarket += this.prixmarket * 0.1
                     
                 }
@@ -103,10 +100,8 @@ export default class Game extends Phaser.Scene
                 if(this.score >= this.prixdesign){
                     this.score  -= this.prixdesign
                     this.leveldesign = this.leveldesign + 1;
-                    console.log("level market " + this.leveldesign)
                     this.prixdesign += this.prixdesign * 0.1
                     this.temps = 0.99 * this.temps
-                    console.log(this.temps)
                 }
             },
             this
@@ -115,34 +110,27 @@ export default class Game extends Phaser.Scene
 
     update(time, delta)
     {
+      this.labelScore.text = "Score:" + this.score.toFixed(2); // affichage du score
+      this.labelMarket.text = "Market:" + this.levelmarket; // affichage du score
+      this.labelDev.text = "Dev:" + this.leveldev; // affichage du score
+      this.labelDesign.text = "Design:" + this.leveldesign; // affichage du score
+      this.labelPointsTemps.text =
+        "Nombre de point(s) par tic :" + this.leveldev; // affichage du score
+      this.labelTemps.text =
+        "Points toutes les :" + (this.temps / 1000).toFixed(3) + " seconde"; // affichage du score
+      this.labelPointPerClick.text =
+        "Points par clique:" + (1 + this.levelmarket * 0.1); // affichage du score
+      this.coutmarket.text = "Cout Market:" + this.prixmarket.toFixed(2); // affichage du score
+      this.coutdev.text = "Cout Dev:" + this.prixdev.toFixed(2); // affichage du score
+      this.coutdesign.text = "Cout Design:" + this.prixdesign.toFixed(2); // affichage du score
+      //this.timer = this.time.events.loop(200, this.score += (this.leveldev * 1 ), this);
 
-        this.labelScore.text = "Score:" + this.score.toFixed(2);// affichage du score
-        this.labelMarket.text = "Market:" + this.levelmarket;// affichage du score
-        this.labelDev.text = "Dev:" + this.leveldev;// affichage du score
-        this.labelDesign.text = "Design:" + this.leveldesign;// affichage du score
-        this.labelPointsTemps.text = "Nombre de point(s) par tic :" +  (this.leveldev);// affichage du score
-        this.labelTemps.text = "Points toutes les :" + (this.temps / 1000).toFixed(3) + " seconde";// affichage du score
-        this.labelPointPerClick.text = "Points par clique:" + (1 + (this.levelmarket * 0.1)) // affichage du score
-        this.coutmarket.text = "Cout Market:" + this.prixmarket.toFixed(2);// affichage du score
-        this.coutdev.text = "Cout Dev:" + this.prixdev.toFixed(2);// affichage du score
-        this.coutdesign.text = "Cout Design:" + this.prixdesign.toFixed(2);// affichage du score
-        //this.timer = this.time.events.loop(200, this.score += (this.leveldev * 1 ), this);
-
-        this.timer += delta;
-        while (this.timer > this.temps) {
-
-            this.timer -= this.temps;
-            this.score += 1 * this.leveldev
-        }
-        console.log(this.score)
+      this.timer += delta;
+      while (this.timer > this.temps) {
+        this.timer -= this.temps;
+        this.score += 1 * this.leveldev;
+      }
     }
-
-    setScore = function(){
-        Game.scene.score = parseInt(localStorage.getItem('score')) || 0;
-        Game.scene.scoreTxt.setText(Game.scene.score);
-    };
-
-
 
     saveFile = function(){
         var file = {
@@ -155,7 +143,6 @@ export default class Game extends Phaser.Scene
             prixdesign: this.prixdesign,
             temps: this.temps,
             timer: this.timer
-
         };
         localStorage.setItem('saveFile',JSON.stringify(file));
     };
@@ -171,7 +158,6 @@ export default class Game extends Phaser.Scene
         this.prixmarket = file.prixmarket;
         this.temps = file.temps;
         this.timer = file.timer;
-
     };
     
 }
