@@ -30,7 +30,7 @@ export default class Game extends Phaser.Scene
         nws.on(
             "pointerdown",
             function() {
-              this.scene.start("listlevelm1");
+              
             },
             this
         );
