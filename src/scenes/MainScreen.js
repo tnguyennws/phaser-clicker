@@ -9,24 +9,20 @@ export default class MainScreen extends Phaser.Scene
 
     preload()
     {
-        this.load.image('background', 'assets/background1.png');
+
     }
 
     create()
     {
         const width = this.scale.width
         const height = this.scale.height
-
-        // add a background image
-        this.add.image(480, 320, 'background')
-        .setScrollFactor(1, 0)
         
-        this.add.text(width * 0.5, height * 0.5, 'Space Fighters', {
+        this.add.text(width * 0.5, height * 0.5, 'NWS Clicker', {
         fontSize: 32
         })
         .setOrigin(0.5)
 
-        this.add.text(width * 0.5, height * 0.6, 'press Space to play', {
+        this.add.text(width * 0.5, height * 0.6, 'press key SPACE to play', {
             fontSize: 30
             })
             .setOrigin(0.5)
