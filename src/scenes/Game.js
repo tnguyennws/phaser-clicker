@@ -18,6 +18,7 @@ export default class Game extends Phaser.Scene
         this.prixdesign = 10;
         this.temps = 1000;
         this.timer = 0;
+        
        
     }
 
@@ -37,6 +38,9 @@ export default class Game extends Phaser.Scene
         this.labelMarket = this.add.text(900, 580, "Market: 0", {font: "30px Arial", fill: "#ffff"} );
         this.labelDev= this.add.text(900, 260, "Dev: 0", {font: "30px Arial", fill: "#ffff"} );
         this.labelDesign = this.add.text(900, 850, "Design: 0", {font: "30px Arial", fill: "#ffff"} );
+        this.labelPointPerClick = this.add.text(0, 850, "Point par Clique: 1", {font: "30px Arial", fill: "#ffff"} );
+        this.labelTemps = this.add.text(0, 800, "Points toutes les : ", {font: "30px Arial", fill: "#ffff"} );
+        this.labelPointsTemps = this.add.text(0, 750, "nombre de point(s) par tic  : ", {font: "30px Arial", fill: "#ffff"} );
         this.coutmarket = this.add.text(900, 300, "Cout Market: 10", {font: "30px Arial", fill: "#ffff"} );
         this.coutdev = this.add.text(900, 0, "Cout Dev: 10", {font: "30px Arial", fill: "#ffff"} );
         this.coutdesign = this.add.text(900, 620, "Cout Design: 10", {font: "30px Arial", fill: "#ffff"} );
@@ -83,6 +87,7 @@ export default class Game extends Phaser.Scene
                     this.levelmarket = this.levelmarket + 1;
                     console.log("level market " + this.levelmarket)
                     this.prixmarket += this.prixmarket * 0.1
+                    
                 }
             },
             this
@@ -115,6 +120,9 @@ export default class Game extends Phaser.Scene
         this.labelMarket.text = "Market:" + this.levelmarket;// affichage du score
         this.labelDev.text = "Dev:" + this.leveldev;// affichage du score
         this.labelDesign.text = "Design:" + this.leveldesign;// affichage du score
+        this.labelPointsTemps.text = "nombre de point(s) par tic :" +  (this.leveldev);// affichage du score
+        this.labelTemps.text = "Points toutes les :" + (this.temps / 1000).toFixed(2) + " sedonde";// affichage du score
+        this.labelPointPerClick.text = "Points par clique:" + (1 + (this.levelmarket * 0.1)) // affichage du score
         this.coutmarket.text = "Cout Market:" + this.prixmarket.toFixed(2);// affichage du score
         this.coutdev.text = "Cout Dev:" + this.prixdev.toFixed(2);// affichage du score
         this.coutdesign.text = "Cout Design:" + this.prixdesign.toFixed(2);// affichage du score
