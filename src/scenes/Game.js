@@ -9,7 +9,7 @@ export default class Game extends Phaser.Scene
 
     init()
     {
-
+        this.score = 0;
     }
 
     preload()
@@ -19,10 +19,12 @@ export default class Game extends Phaser.Scene
         this.load.image('dev', 'assets/logo_dev.png')
         this.load.image('market', 'assets/logo_market.png')
         this.load.image('design', 'assets/logo_web.png')
+        
     }
 
     create()
     {
+        this.labelScore = this.add.text(20, 20, "score: 0", {font: "30px Arial", fill: "#ffff"} );
         var nws = this.add.image(300, 400, "nws").setScale(0.2);
 
         nws.setInteractive();
@@ -30,7 +32,7 @@ export default class Game extends Phaser.Scene
         nws.on(
             "pointerdown",
             function() {
-              
+              this.score = this.score + 1
             },
             this
         );
@@ -74,7 +76,8 @@ export default class Game extends Phaser.Scene
 
     update()
     {
-
+        console.log(this.score)
+        this.labelScore.text = "score:" + this.score;// affichage du score
     }
 
     setScore = function(){
