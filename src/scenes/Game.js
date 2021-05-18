@@ -11,7 +11,11 @@ export default class Game extends Phaser.Scene
     {
         this.score = 0;
         this.levelmarket = 0;
+        this.leveldev = 0;
+        this.leveldesign = 0;
         this.prixmarket = 10;
+        this.prixdev = 10;
+        this.prixdesign = 10;
        
     }
 
@@ -29,7 +33,11 @@ export default class Game extends Phaser.Scene
     {
         this.labelScore = this.add.text(20, 20, "Score: 0", {font: "30px Arial", fill: "#ffff"} );
         this.labelMarket = this.add.text(900, 580, "Market: 0", {font: "30px Arial", fill: "#ffff"} );
+        this.labelDev= this.add.text(900, 260, "Dev: 0", {font: "30px Arial", fill: "#ffff"} );
+        this.labelDesign = this.add.text(900, 850, "Design: 0", {font: "30px Arial", fill: "#ffff"} );
         this.coutmarket = this.add.text(900, 300, "Cout Market: 10", {font: "30px Arial", fill: "#ffff"} );
+        this.coutdev = this.add.text(900, 0, "Cout Dev: 10", {font: "30px Arial", fill: "#ffff"} );
+        this.coutdesign = this.add.text(900, 620, "Cout Design: 10", {font: "30px Arial", fill: "#ffff"} );
         var nws = this.add.image(300, 400, "nws").setScale(0.2);
 
         nws.setInteractive();
@@ -39,6 +47,7 @@ export default class Game extends Phaser.Scene
             function() {
                 
                 this.score += (this.levelmarket * 0.1) + 1;
+
             },
             this
         );
@@ -50,7 +59,12 @@ export default class Game extends Phaser.Scene
         dev.on(
             "pointerdown",
             function() {
-              
+                if(this.score >= this.prixdev){
+                    this.score  -= this.prixdev
+                    this.leveldev = this.leveldev + 1;
+                    this.prixdev += this.prixdev * 0.1
+                    
+                }
             },
             this
         );
@@ -79,7 +93,12 @@ export default class Game extends Phaser.Scene
         design.on(
             "pointerdown",
             function() {
-              
+                if(this.score >= this.prixdesign){
+                    this.score  -= this.prixdesign
+                    this.leveldesign = this.leveldesign + 1;
+                    console.log("level market " + this.leveldesign)
+                    this.prixdesign += this.prixdesign * 0.1
+                }
             },
             this
         );
@@ -90,7 +109,12 @@ export default class Game extends Phaser.Scene
 
         this.labelScore.text = "Score:" + this.score.toFixed(2);// affichage du score
         this.labelMarket.text = "Market:" + this.levelmarket;// affichage du score
+        this.labelDev.text = "Dev:" + this.leveldev;// affichage du score
+        this.labelDesign.text = "Design:" + this.leveldesign;// affichage du score
         this.coutmarket.text = "Cout Market:" + this.prixmarket.toFixed(2);// affichage du score
+        this.coutdev.text = "Cout Dev:" + this.prixdev.toFixed(2);// affichage du score
+        this.coutdesign.text = "Cout Design:" + this.prixdesign.toFixed(2);// affichage du score
+        //this.timer = this.time.events.loop(200, this.score += (this.leveldev * 1 ), this);
     }
 
     setScore = function(){
