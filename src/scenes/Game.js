@@ -11,7 +11,8 @@ export default class Game extends Phaser.Scene
     {
         this.score = 0;
         this.levelmarket = 0;
-        
+        this.prixmarket = 10;
+       
     }
 
     preload()
@@ -26,7 +27,9 @@ export default class Game extends Phaser.Scene
 
     create()
     {
-        this.labelScore = this.add.text(20, 20, "score: 0", {font: "30px Arial", fill: "#ffff"} );
+        this.labelScore = this.add.text(20, 20, "Score: 0", {font: "30px Arial", fill: "#ffff"} );
+        this.labelMarket = this.add.text(900, 580, "Market: 0", {font: "30px Arial", fill: "#ffff"} );
+        this.coutmarket = this.add.text(900, 300, "Cout Market: 10", {font: "30px Arial", fill: "#ffff"} );
         var nws = this.add.image(300, 400, "nws").setScale(0.2);
 
         nws.setInteractive();
@@ -34,7 +37,8 @@ export default class Game extends Phaser.Scene
         nws.on(
             "pointerdown",
             function() {
-              this.score += (this.levelmarket * 0.1) + 1;
+                
+                this.score += (this.levelmarket * 0.1) + 1;
             },
             this
         );
@@ -58,8 +62,12 @@ export default class Game extends Phaser.Scene
         market.on(
             "pointerdown",
             function() {
-                this.levelmarket = this.levelmarket + 1;
-                console.log("level market " + this.levelmarket)
+                if(this.score >= this.prixmarket){
+                    this.score  -= this.prixmarket
+                    this.levelmarket = this.levelmarket + 1;
+                    console.log("level market " + this.levelmarket)
+                    this.prixmarket += this.prixmarket * 0.1
+                }
             },
             this
         );
@@ -80,7 +88,9 @@ export default class Game extends Phaser.Scene
     update()
     {
 
-        this.labelScore.text = "score:" + this.score;// affichage du score
+        this.labelScore.text = "Score:" + this.score.toFixed(2);// affichage du score
+        this.labelMarket.text = "Market:" + this.levelmarket;// affichage du score
+        this.coutmarket.text = "Cout Market:" + this.prixmarket.toFixed(2);// affichage du score
     }
 
     setScore = function(){
