@@ -6,7 +6,7 @@ import MainScreen from './scenes/MainScreen.js'
 export default new Phaser.Game({
     type: Phaser.AUTO,
     width: 1340,
-    height: 640,
+    height: 900,
     scene: [MainScreen, Game],
     physics: {
         default: 'arcade',
