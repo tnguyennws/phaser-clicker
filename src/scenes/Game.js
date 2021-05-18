@@ -7,6 +7,35 @@ export default class Game extends Phaser.Scene
         super('game')
     }
 
+    saveFile(){
+        var file = {
+            score: this.score,
+            levelmarket: this.levelmarket,
+            leveldev: this.leveldev,
+            leveldesign: this.leveldesign,
+            prixmarket: this.prixmarket,
+            prixdev: this.prixdev,
+            prixdesign: this.prixdesign,
+            temps: this.temps,
+            timer: this.timer
+        };
+        console.log("Fichier enregistré");
+        localStorage.setItem('saveFile',JSON.stringify(file));
+    };
+
+    loadFile(){
+        var file = JSON.parse(localStorage.getItem('saveFile'));
+        this.score = file.score;
+        this.levelmarket = file.levelmarket;
+        this.leveldesign = file.leveldesign;
+        this.leveldev = file.leveldev;
+        this.prixdesign = file.prixdesign;
+        this.prixdev = file.prixdev;
+        this.prixmarket = file.prixmarket;
+        this.temps = file.temps;
+        this.timer = file.timer;
+    };
+
     init()
     {
         this.score = 0;
@@ -24,10 +53,12 @@ export default class Game extends Phaser.Scene
     preload()
     {
         this.load.image('nws', 'assets/logo.png')
-
         this.load.image('dev', 'assets/logo_dev.png')
         this.load.image('market', 'assets/logo_market.png')
         this.load.image('design', 'assets/logo_web.png')
+
+        this.load.image('sauvegarde', 'assets/sauvegarde.png')
+        this.load.image('telecharger', 'assets/telecharger.png')
         
     }
 
@@ -46,6 +77,29 @@ export default class Game extends Phaser.Scene
         this.coutmarket = this.add.text(860, 380, "Cout Market: 10", {font: "30px Times New Roman", fill: "#FF91A9"} );
         this.coutdev = this.add.text(860, 90, "Cout Dev: 10", {font: "30px Times New Roman", fill: "#FFE200"} );
         this.coutdesign = this.add.text(860, 690, "Cout Design: 10", {font: "30px Times New Roman", fill: "#00CFFF"} );
+
+        var sauvegarde = this.add.image(1230, 45, "sauvegarde").setScale(0.1);
+
+        sauvegarde.setInteractive();
+        sauvegarde.on(
+            "pointerdown",
+            function(){
+                this.saveFile();
+            },
+            this
+        );
+
+        var telecharger = this.add.image(1300, 45, "telecharger").setScale(0.1);
+
+        telecharger.setInteractive();
+        telecharger.on(
+            "pointerdown",
+            function(){
+                this.loadFile();
+            },
+            this
+        );
+
         var nws = this.add.image(300, 400, "nws").setScale(0.2);
 
         nws.setInteractive();
@@ -147,33 +201,5 @@ export default class Game extends Phaser.Scene
         localStorage.setItem('score', this.score);
       }
     }
-
-    saveFile = function(){
-        var file = {
-            score: this.score,
-            levelmarket: this.levelmarket,
-            leveldev: this.leveldev,
-            leveldesign: this.leveldesign,
-            prixmarket: this.prixmarket,
-            prixdev: this.prixdev,
-            prixdesign: this.prixdesign,
-            temps: this.temps,
-            timer: this.timer
-        };
-        localStorage.setItem('saveFile',JSON.stringify(file));
-    };
-
-    loadFile = function(){
-        var file = JSON.parse(localStorage.getItem('saveFile'));
-        this.score = file.score;
-        this.levelmarket = file.levelmarket;
-        this.leveldesign = file.leveldesign;
-        this.leveldev = file.leveldev;
-        this.prixdesign = file.prixdesign;
-        this.prixdev = file.prixdev;
-        this.prixmarket = file.prixmarket;
-        this.temps = file.temps;
-        this.timer = file.timer;
-    };
     
 }
