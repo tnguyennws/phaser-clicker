@@ -10,6 +10,7 @@ export default class Game extends Phaser.Scene
     init()
     {
         this.score = 0;
+        this.levelmarket = 0;
     }
 
     preload()
@@ -32,7 +33,7 @@ export default class Game extends Phaser.Scene
         nws.on(
             "pointerdown",
             function() {
-              this.score = this.score + 1
+              updateScore(this.levelmarket * 0.1 + 1);
             },
             this
         );
@@ -56,7 +57,7 @@ export default class Game extends Phaser.Scene
         market.on(
             "pointerdown",
             function() {
-              
+                this.levelmarket += 1;
             },
             this
         );
@@ -85,6 +86,12 @@ export default class Game extends Phaser.Scene
         Game.scene.scoreTxt.setText(Game.scene.score);
     };
 
+    updateScore = function(increment){
+        // Updates the score and stores the new value in the localStorage
+        this.score += increment + 1;
+        localStorage.setItem('score', this.score);
+    };
+
     saveFile = function(){
         var file = {
             score: Game.scene.score,
@@ -96,7 +103,6 @@ export default class Game extends Phaser.Scene
     loadFile = function(){
         var file = JSON.parse(localStorage.getItem('saveFile'));
         Game.scene.score = file.score;
-        Game.scene.visits = file.visits;
     };
 
 }
