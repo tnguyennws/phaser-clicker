@@ -17,7 +17,8 @@ export default class Game extends Phaser.Scene
         this.prixdev = 10;
         this.prixdesign = 10;
         this.resources = 0;
-this.timer = 0;
+        this.temps = 1000;
+        this.timer = 0;
        
     }
 
@@ -100,6 +101,8 @@ this.timer = 0;
                     this.leveldesign = this.leveldesign + 1;
                     console.log("level market " + this.leveldesign)
                     this.prixdesign += this.prixdesign * 0.1
+                    this.temps = 0.99 * this.temps
+                    console.log(this.temps)
                 }
             },
             this
@@ -119,9 +122,9 @@ this.timer = 0;
         //this.timer = this.time.events.loop(200, this.score += (this.leveldev * 1 ), this);
 
         this.timer += delta;
-        while (this.timer > 1000) {
-            this.resources += 1;
-            this.timer -= 1000;
+        while (this.timer > this.temps) {
+
+            this.timer -= this.temps;
             this.score += 1 * this.leveldev
         }
         console.log(this.score)
