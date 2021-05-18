@@ -36,6 +36,11 @@ export default class Game extends Phaser.Scene
         this.timer = file.timer;
     };
 
+    deleteFile(){
+        localStorage.removeItem('saveFile');
+    };
+
+
     init()
     {
         this.score = 0;
@@ -59,6 +64,7 @@ export default class Game extends Phaser.Scene
 
         this.load.image('sauvegarde', 'assets/sauvegarde.png')
         this.load.image('telecharger', 'assets/telecharger.png')
+        this.load.image('delete', 'assets/trash.png')
         
     }
 
@@ -96,6 +102,17 @@ export default class Game extends Phaser.Scene
             "pointerdown",
             function(){
                 this.loadFile();
+            },
+            this
+        );
+
+        var supprimer = this.add.image(1300, 850, "delete").setScale(0.1);
+
+        supprimer.setInteractive();
+        supprimer.on(
+            "pointerdown",
+            function(){
+                this.deleteFile();
             },
             this
         );
