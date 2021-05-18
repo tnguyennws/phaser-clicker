@@ -120,8 +120,8 @@ export default class Game extends Phaser.Scene
         this.labelMarket.text = "Market:" + this.levelmarket;// affichage du score
         this.labelDev.text = "Dev:" + this.leveldev;// affichage du score
         this.labelDesign.text = "Design:" + this.leveldesign;// affichage du score
-        this.labelPointsTemps.text = "nombre de point(s) par tic :" +  (this.leveldev);// affichage du score
-        this.labelTemps.text = "Points toutes les :" + (this.temps / 1000).toFixed(2) + " sedonde";// affichage du score
+        this.labelPointsTemps.text = "Nombre de point(s) par tic :" +  (this.leveldev);// affichage du score
+        this.labelTemps.text = "Points toutes les :" + (this.temps / 1000).toFixed(3) + " seconde";// affichage du score
         this.labelPointPerClick.text = "Points par clique:" + (1 + (this.levelmarket * 0.1)) // affichage du score
         this.coutmarket.text = "Cout Market:" + this.prixmarket.toFixed(2);// affichage du score
         this.coutdev.text = "Cout Dev:" + this.prixdev.toFixed(2);// affichage du score
