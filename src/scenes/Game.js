@@ -223,7 +223,7 @@ export default class Game extends Phaser.Scene
       this.labelDev.text = "Dev :" + this.leveldev; 
       this.labelDesign.text = "Design :" + this.leveldesign; 
       this.labelPointsTemps.text =
-        "Nombre de point(s) par tic :" + this.leveldev; 
+        "Nombre de point(s) par tick :" + this.leveldev; 
       this.labelTemps.text =
         "Point(s) toutes les :" + (this.temps / 1000).toFixed(3) + " seconde"; 
       this.labelPointPerClick.text =
