@@ -142,11 +142,11 @@ export default class Game extends Phaser.Scene
             levelmarket: this.levelmarket,
             leveldev: this.leveldev,
             leveldesign: this.leveldesign,
-            prixmarket = this.prixmarket,
-            prixdev = this.prixdev,
-            prixdesign = this.prixdesign,
-            temps = this.temps,
-            timer = this.timer
+            prixmarket: this.prixmarket,
+            prixdev: this.prixdev,
+            prixdesign: this.prixdesign,
+            temps: this.temps,
+            timer: this.timer
 
         };
         localStorage.setItem('saveFile',JSON.stringify(file));
@@ -155,6 +155,15 @@ export default class Game extends Phaser.Scene
     loadFile = function(){
         var file = JSON.parse(localStorage.getItem('saveFile'));
         this.score = file.score;
+        this.levelmarket = file.levelmarket;
+        this.leveldesign = file.leveldesign;
+        this.leveldev = file.leveldev;
+        this.prixdesign = file.prixdesign;
+        this.prixdev = file.prixdev;
+        this.prixmarket = file.prixmarket;
+        this.temps = file.temps;
+        this.timer = file.timer;
+
     };
     
 }
