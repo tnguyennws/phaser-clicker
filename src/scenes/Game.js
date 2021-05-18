@@ -90,7 +90,10 @@ export default class Game extends Phaser.Scene
         sauvegarde.on(
             "pointerdown",
             function(){
-                this.saveFile();
+                if (window.confirm("Voulez vous  sauvegardez ?.")) {
+                    this.saveFile();
+                }
+                
             },
             this
         );
@@ -100,8 +103,11 @@ export default class Game extends Phaser.Scene
         telecharger.setInteractive();
         telecharger.on(
             "pointerdown",
-            function(){
-                this.loadFile();
+            function(){                
+                if (window.confirm("Voulez vous chargez la sauvegarde ?.")) {
+                    this.loadFile();
+                }
+                
             },
             this
         );
@@ -112,7 +118,7 @@ export default class Game extends Phaser.Scene
         supprimer.on(
             "pointerdown",
             function(){
-                if (window.confirm("Voulez vous supprimez ????.")) {
+                if (window.confirm("Voulez vous supprimez ?.")) {
                     this.deleteFile();
                 }
 
