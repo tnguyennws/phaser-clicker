@@ -18,12 +18,19 @@ export default class MainScreen extends Phaser.Scene
         const height = this.scale.height
         
         this.add.text(width * 0.5, height * 0.5, 'NWS Clicker', {
-        fontSize: 32
+            font: "70px Times New Roman", fill: "#00B1AB"
         })
         .setOrigin(0.5)
 
-        this.add.text(width * 0.5, height * 0.6, 'press key SPACE to play', {
-            fontSize: 30
+        this.add.text(width * 0.4, height * 0.6, 'press key SPA ', {
+            font: "70px Times New Roman", fill: "#FEC70C"
+
+            })
+            .setOrigin(0.5)
+
+        this.add.text(width * 0.65, height * 0.6, 'CE to play', {
+            font: "70px Times New Roman", fill: "#F0553E"
+    
             })
             .setOrigin(0.5)
 

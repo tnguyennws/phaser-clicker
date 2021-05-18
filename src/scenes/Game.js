@@ -72,17 +72,17 @@ export default class Game extends Phaser.Scene
     {
         this.labelScore = this.add.text(20, 20, "Score: 0", {font: "50px Times New Roman", fill: "#FFE200"} );
 
-        this.labelMarket = this.add.text(860, 460, "Market: 0", {font: "30px Times New Roman", fill: "#FF91A9"} );
-        this.labelDev= this.add.text(860, 180, "Dev: 0", {font: "30px Times New Roman", fill: "#FFE200"} );
-        this.labelDesign = this.add.text(860, 770, "Design: 0", {font: "30px Times New Roman", fill: "#00CFFF"} );
+        this.labelMarket = this.add.text(860, 460, "Market: 0", {font: "30px Times New Roman", fill: "#F0553E"} );
+        this.labelDev= this.add.text(860, 180, "Dev: 0", {font: "30px Times New Roman", fill: "#FEC70C"} );
+        this.labelDesign = this.add.text(860, 770, "Design: 0", {font: "30px Times New Roman", fill: "#00B1AB"} );
 
         this.labelPointPerClick = this.add.text(0, 800, "Point par Clique: 1", {font: "30px Times New Roman", fill: "#FF91A9"} );
         this.labelTemps = this.add.text(0, 750, "Points toutes les : ", {font: "30px Times New Roman", fill: "#FFE200"} );
         this.labelPointsTemps = this.add.text(0, 850, "nombre de point(s) par tic  : ", {font: "30px Times New Roman", fill: "#00CFFF"} );
 
-        this.coutmarket = this.add.text(860, 380, "Cout Market: 10", {font: "30px Times New Roman", fill: "#FF91A9"} );
-        this.coutdev = this.add.text(860, 90, "Cout Dev: 10", {font: "30px Times New Roman", fill: "#FFE200"} );
-        this.coutdesign = this.add.text(860, 690, "Cout Design: 10", {font: "30px Times New Roman", fill: "#00CFFF"} );
+        this.coutmarket = this.add.text(860, 380, "Cout Market: 10", {font: "30px Times New Roman", fill: "#F0553E"} );
+        this.coutdev = this.add.text(860, 90, "Cout Dev: 10", {font: "30px Times New Roman", fill: "#FEC70C"} );
+        this.coutdesign = this.add.text(860, 690, "Cout Design: 10", {font: "30px Times New Roman", fill: "#00B1AB"} );
 
         var sauvegarde = this.add.image(1230, 45, "sauvegarde").setScale(0.1);
 
