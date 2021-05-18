@@ -16,7 +16,6 @@ export default class Game extends Phaser.Scene
         this.prixmarket = 10;
         this.prixdev = 10;
         this.prixdesign = 10;
-        this.resources = 0;
         this.temps = 1000;
         this.timer = 0;
        
@@ -139,15 +138,23 @@ export default class Game extends Phaser.Scene
 
     saveFile = function(){
         var file = {
-            score: Game.scene.score,
-            visits: Game.scene.visits
+            score: this.score,
+            levelmarket: this.levelmarket,
+            leveldev: this.leveldev,
+            leveldesign: this.leveldesign,
+            prixmarket = this.prixmarket,
+            prixdev = this.prixdev,
+            prixdesign = this.prixdesign,
+            temps = this.temps,
+            timer = this.timer
+
         };
         localStorage.setItem('saveFile',JSON.stringify(file));
     };
 
     loadFile = function(){
         var file = JSON.parse(localStorage.getItem('saveFile'));
-        Game.scene.score = file.score;
+        this.score = file.score;
     };
     
 }
