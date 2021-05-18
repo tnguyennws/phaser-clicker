@@ -7,22 +7,25 @@ export default class Game extends Phaser.Scene
         super('game')
     }
 
+    // --------------- GESTION DES DONNEES --------------------
+    //Fonction de sauvegarde dans le local storage
     saveFile(){
         var file = {
-            score: this.score,
-            levelmarket: this.levelmarket,
-            leveldev: this.leveldev,
-            leveldesign: this.leveldesign,
-            prixmarket: this.prixmarket,
-            prixdev: this.prixdev,
-            prixdesign: this.prixdesign,
-            temps: this.temps,
-            timer: this.timer
+          score: this.score,
+          levelmarket: this.levelmarket,
+          leveldev: this.leveldev,
+          leveldesign: this.leveldesign,
+          prixmarket: this.prixmarket,
+          prixdev: this.prixdev,
+          prixdesign: this.prixdesign,
+          temps: this.temps,
+          timer: this.timer,
         };
         console.log("Fichier enregistré");
         localStorage.setItem('saveFile',JSON.stringify(file));
     };
 
+    //Fonction de chargement depuis le local storage
     loadFile(){
         var file = JSON.parse(localStorage.getItem('saveFile'));
         this.score = file.score;
@@ -36,11 +39,12 @@ export default class Game extends Phaser.Scene
         this.timer = file.timer;
     };
 
+    //Deletion de la sauvegarde
     deleteFile(){
         localStorage.removeItem('saveFile');
     };
 
-
+    //----------------- INIT ----------------
     init()
     {
         this.score = 0;
@@ -56,7 +60,8 @@ export default class Game extends Phaser.Scene
     }
 
     preload()
-    {
+    {  
+        //Preload des assets
         this.load.image('nws', 'assets/logo.png')
         this.load.image('dev', 'assets/logo_dev.png')
         this.load.image('market', 'assets/logo_market.png')
@@ -69,56 +74,63 @@ export default class Game extends Phaser.Scene
     }
 
     create()
-    {
-        this.labelScore = this.add.text(20, 20, "Score: 0", {font: "50px Times New Roman", fill: "#FFE200"} );
+    {  
+        //Affichage des points
+        this.labelScore = this.add.text(20, 20, "NWS Coins : 0", {font: "50px Times New Roman", fill: "#FFE200"} );
 
-        this.labelMarket = this.add.text(860, 460, "Market: 0", {font: "30px Times New Roman", fill: "#F0553E"} );
+        //Affichage des quantités d'élèves
+        this.labelMarket = this.add.text(860, 460, "Marketeux: 0", {font: "30px Times New Roman", fill: "#F0553E"} );
         this.labelDev= this.add.text(860, 180, "Dev: 0", {font: "30px Times New Roman", fill: "#FEC70C"} );
         this.labelDesign = this.add.text(860, 770, "Design: 0", {font: "30px Times New Roman", fill: "#00B1AB"} );
 
-        this.labelPointPerClick = this.add.text(0, 800, "Point par Clique: 1", {font: "30px Times New Roman", fill: "#FF91A9"} );
-        this.labelTemps = this.add.text(0, 750, "Points toutes les : ", {font: "30px Times New Roman", fill: "#FFE200"} );
-        this.labelPointsTemps = this.add.text(0, 850, "nombre de point(s) par tic  : ", {font: "30px Times New Roman", fill: "#00CFFF"} );
+        //Affichage des bonus totaux
+        this.labelPointPerClick = this.add.text(0, 800, "Point par clique: 1", {font: "30px Times New Roman", fill: "#FF91A9"} );
+        this.labelTemps = this.add.text(0, 750, "Point(s) toutes les : ", {font: "30px Times New Roman", fill: "#FFE200"} );
+        this.labelPointsTemps = this.add.text(0, 850, "Nombre de point(s) par tick  : ", {font: "30px Times New Roman", fill: "#00CFFF"} );
 
-        this.coutmarket = this.add.text(860, 380, "Cout Market: 10", {font: "30px Times New Roman", fill: "#F0553E"} );
-        this.coutdev = this.add.text(860, 90, "Cout Dev: 10", {font: "30px Times New Roman", fill: "#FEC70C"} );
-        this.coutdesign = this.add.text(860, 690, "Cout Design: 10", {font: "30px Times New Roman", fill: "#00B1AB"} );
+        //Affichage du niveau des bonus
+        this.coutmarket = this.add.text(860, 380, "Coût Marketeux: 10", {font: "30px Times New Roman", fill: "#F0553E"} );
+        this.coutdev = this.add.text(860, 90, "Coût Dev: 10", {font: "30px Times New Roman", fill: "#FEC70C"} );
+        this.coutdesign = this.add.text(860, 690, "Coût Design: 10", {font: "30px Times New Roman", fill: "#00B1AB"} );
 
+        //Bouton sauvegarde
         var sauvegarde = this.add.image(1230, 45, "sauvegarde").setScale(0.1);
 
         sauvegarde.setInteractive();
         sauvegarde.on(
             "pointerdown",
             function(){
-                if (window.confirm("Voulez vous  sauvegardez ?.")) {
+                if (window.confirm("Voulez vous sauvegarder ?")) {
                     this.saveFile();
                 }
                 
             },
             this
         );
-
+        
+        //Bouton chargement
         var telecharger = this.add.image(1300, 45, "telecharger").setScale(0.1);
 
         telecharger.setInteractive();
         telecharger.on(
             "pointerdown",
             function(){                
-                if (window.confirm("Voulez vous chargez la sauvegarde ?.")) {
+                if (window.confirm("Voulez vous charger la sauvegarde ?")) {
                     this.loadFile();
                 }
                 
             },
             this
         );
-
+        
+        //Bouton suppression
         var supprimer = this.add.image(1300, 850, "delete").setScale(0.1);
 
         supprimer.setInteractive();
         supprimer.on(
             "pointerdown",
             function(){
-                if (window.confirm("Voulez vous supprimez ?.")) {
+                if (window.confirm("Voulez vous supprimer ?")) {
                     this.deleteFile();
                 }
 
@@ -126,6 +138,8 @@ export default class Game extends Phaser.Scene
             this
         );
 
+
+        //------------------- LOGO A CLIQUER ----------------
         var nws = this.add.image(300, 400, "nws").setScale(0.2);
 
         nws.setInteractive();
@@ -200,25 +214,25 @@ export default class Game extends Phaser.Scene
         );
     }
 
+    //LOOP UPDATE
     update(time, delta)
     {
       // ZONE DE TEXTE
-      this.labelScore.text = "Score:" + this.score.toFixed(2); // affichage du score
-      this.labelMarket.text = "Market:" + this.levelmarket; // affichage du score
-      this.labelDev.text = "Dev:" + this.leveldev; // affichage du score
-      this.labelDesign.text = "Design:" + this.leveldesign; // affichage du score
+      this.labelScore.text = "NWS Coins :" + this.score.toFixed(2); 
+      this.labelMarket.text = "Marketeux :" + this.levelmarket; 
+      this.labelDev.text = "Dev :" + this.leveldev; 
+      this.labelDesign.text = "Design :" + this.leveldesign; 
       this.labelPointsTemps.text =
-        "Nombre de point(s) par tic :" + this.leveldev; // affichage du score
+        "Nombre de point(s) par tic :" + this.leveldev; 
       this.labelTemps.text =
-        "Points toutes les :" + (this.temps / 1000).toFixed(3) + " seconde"; // affichage du score
+        "Point(s) toutes les :" + (this.temps / 1000).toFixed(3) + " seconde"; 
       this.labelPointPerClick.text =
-        "Points par clique:" + (1 + this.levelmarket * 0.1); // affichage du score
-      this.coutmarket.text = "Cout Market:" + this.prixmarket.toFixed(2); // affichage du score
-      this.coutdev.text = "Cout Dev:" + this.prixdev.toFixed(2); // affichage du score
-      this.coutdesign.text = "Cout Design:" + this.prixdesign.toFixed(2); // affichage du score
-      //this.timer = this.time.events.loop(200, this.score += (this.leveldev * 1 ), this);
+        "Points par clique :" + (1 + this.levelmarket * 0.1); 
+      this.coutmarket.text = "Coût Marketeux :" + this.prixmarket.toFixed(2); 
+      this.coutdev.text = "Coût Dev :" + this.prixdev.toFixed(2); 
+      this.coutdesign.text = "Coût Design :" + this.prixdesign.toFixed(2); 
 
-
+      //GESTION DU TIMER
       this.timer += delta;
       
       while (this.timer > this.temps) {
