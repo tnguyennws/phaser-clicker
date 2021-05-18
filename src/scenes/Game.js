@@ -112,7 +112,10 @@ export default class Game extends Phaser.Scene
         supprimer.on(
             "pointerdown",
             function(){
-                this.deleteFile();
+                if (window.confirm("Voulez vous supprimez ????.")) {
+                    this.deleteFile();
+                }
+
             },
             this
         );
