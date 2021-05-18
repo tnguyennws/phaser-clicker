@@ -18,8 +18,6 @@ export default class Game extends Phaser.Scene
         this.prixdesign = 10;
         this.temps = 1000;
         this.timer = 0;
-
-        this.loadFile();
         
     }
 
